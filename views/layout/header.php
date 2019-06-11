@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="<?=base_url?>./assets/css/styles.css">
     <title>Tienda de camisetas</title>
 </head>
 
@@ -15,7 +15,7 @@
         <!-- CABECERA-->
         <header id="header">
             <div id="logo">
-                <img src="./assets/img/camiseta.png" alt="camiseta logo">
+                <img src="<?=base_url?>./assets/img/camiseta.png" alt="camiseta logo">
                 <a href="index.php">
                     <h1>Tienda de Camisetas</h1>
                 </a>
