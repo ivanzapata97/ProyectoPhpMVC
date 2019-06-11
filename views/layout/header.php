@@ -16,7 +16,7 @@
         <header id="header">
             <div id="logo">
                 <img src="<?=base_url?>./assets/img/camiseta.png" alt="camiseta logo">
-                <a href="index.php">
+                <a href="<?=base_url?>index.php">
                     <h1>Tienda de Camisetas</h1>
                 </a>
             </div>

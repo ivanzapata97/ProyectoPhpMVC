@@ -1,5 +1,7 @@
 <?php
 
+require_once 'models/usuario.php';
+
 class usuarioController{
     public function index(){
         echo "Controlador usuarios, accion index";
@@ -10,7 +12,14 @@ class usuarioController{
     }
     public function save(){
         if(isset($_POST)){
-            var_dump($_POST);
+            $usuario = new usuario();
+            $usuario->setNombre($_POST['nombre']);
+            $usuario->setApellidos($_POST['apellidos']);
+            $usuario->setEmail($_POST['email']);
+            $usuario->setPassword($_POST['password']);
+
+            var_dump($usuario);
+
         }
     }
 }
