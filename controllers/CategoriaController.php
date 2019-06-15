@@ -23,7 +23,15 @@ class categoriaController{
             $categoria = new Categoria();
             $categoria -> setNombre($_POST['nombre']);
             $save = $categoria->save();
-            $_SESSION['add'] = 'true';
+            if($save){
+                $_SESSION['categoria'] = 'complete';
+            }
+            else{
+                $_SESSION['categoria'] = "failed";
+            }
+        }
+        else{
+            $_SESSION['categoria'] = "failed";
         }
         header("Location:".base_url."categoria/index");
 

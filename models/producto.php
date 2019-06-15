@@ -51,19 +51,19 @@ class Producto {
         return $this->categoria_id = $categoria_id;
     }
     function setNombre($nombre){
-        return $this->nombre = $nombre;
+        return $this->nombre = $this->db->real_escape_string($nombre);
     }
     function setDescripcion($descripcion){
-        return $this->descripcion = $descripcion;
+        return $this->descripcion = $this->db->real_escape_string($descripcion);
     }
     function setPrecio($precio){
-        return $this->precio = $precio;
+        return $this->precio = $this->db->real_escape_string($precio);
     }
     function setStock($stock){
-        return $this->stock = $stock;
+        return $this->stock = $this->db->real_escape_string($stock);
     }
     function setOferta($oferta){
-        return $this->oferta = $oferta;
+        return $this->oferta = $this->db->real_escape_string($oferta);
     }
     function setFecha($fecha){
         return $this->fecha = $fecha;
@@ -76,6 +76,25 @@ class Producto {
         $productos = $this->db->query("SELECT * FROM productos ORDER BY id DESC");
         return $productos;
     }
+    public function save(){
+        $sql = "INSERT INTO productos VALUES (null,'{$this->getCategoria_id()}','{$this->getNombre()}','{$this->getDescripcion()}',{$this->getPrecio()},{$this->getStock()},null,CURDATE(),'{$this->getImagen()}')";
+        $save = $this->db->query($sql);
 
+        $result = false;
+        if($save){
+            $result = true;
+        }
+        return $result;
+    }
+    public function delete(){
+    $sql = "DELETE FROM productos WHERE id={$this->id}";
+    $delete = $this->db->query($sql);
+
+    $result = false;
+        if($delete){
+            return true;
+        }
+        return $result;    
+    }
 
 }
