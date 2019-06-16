@@ -39,5 +39,5 @@
             <a href="<?=base_url?>producto/eliminar&id=<?=$pro->id?>" class="button button-gestion button-red">Eliminar</a>
         </td>
     </tr>
-<?php endwhile; ?>
+    <?php endwhile; ?>
 </table>
