@@ -6,7 +6,6 @@ class usuarioController{
     public function index(){
         echo "Controlador usuarios, accion index";
     }
-
     public function registro(){
         require_once 'views/usuario/registro.php';
     }
@@ -62,7 +61,6 @@ class usuarioController{
         }
         header("Location:".base_url);
     }
-
     public function logout(){
         if(isset($_SESSION['identity'])){
             unset($_SESSION['identity']);

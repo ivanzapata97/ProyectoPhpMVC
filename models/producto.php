@@ -80,6 +80,10 @@ class Producto {
         $producto = $this->db->query("SELECT * FROM productos WHERE id ={$this->getId()}");
         return $producto->fetch_object();
     }
+    public function getRandom($limit){
+        $productos = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT $limit ");
+        return $productos;
+    }
     public function save(){
         $sql = "INSERT INTO productos VALUES (null,'{$this->getCategoria_id()}','{$this->getNombre()}','{$this->getDescripcion()}',{$this->getPrecio()},{$this->getStock()}, null, CURDATE(), '{$this->getImagen()}')";
         $save = $this->db->query($sql);
