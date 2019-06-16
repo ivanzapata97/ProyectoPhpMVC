@@ -42,25 +42,34 @@ class productoController{
                 $producto->setStock($stock);
 
                 //guardar la imagen
-                $file = $_FILES['imagen'];
-                $filename = $file['name'];
-                $mimetype = $file['type'];
-                
-
-                if($mimetype == "image/jpg" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "image/gif"){
+                if(isset($_FILES['imagen'])){
+                    $file = $_FILES['imagen'];
+                    $filename = $file['name'];
+                    $mimetype = $file['type'];
                     
-                    if(!is_dir('uploads/images')){
-                        mkdir('uploads/images',0777,true);
+
+                    if($mimetype == "image/jpg" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "image/gif"){
+                        
+                        if(!is_dir('uploads/images')){
+                            mkdir('uploads/images',0777,true);
+                        }
+                        $producto->setImagen($filename);
+                        move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
                     }
-                    $producto->setImagen($filename);
-                    move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
                 }
                 else{
                     $_SESSION['producto'] = "failed";
                 }
+                if(isset($_GET['id'])){
+                    $id  = $_GET['id'];
+                    $producto->setId($id);
+                    $save = $producto->edit();
+                }else {
+                    //var_dump($producto); die();
+                    $save = $producto->save();
 
+                }
 
-                $save = $producto->save();
                 if($save){
                     $_SESSION['producto'] = "complete";
                 }
@@ -78,7 +87,20 @@ class productoController{
         header("Location:".base_url."producto/gestion");
     }
     public function editar(){
+        Utils::isAdmin();
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $edit = true;
+            
+            $producto = new Producto();
+            $producto->setId($id);
+            $pro = $producto->getOne();
 
+            require_once 'views/producto/crear.php';
+        }
+        else{
+            header("Location: ".base_url.'producto/gestion');
+        }
     }
     public function eliminar(){
         Utils::isAdmin();
