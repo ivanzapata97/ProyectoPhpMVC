@@ -88,10 +88,6 @@ class  usuario{
                 $result = $usuario;
 
             }
-            else {
-
-            }
-
         }
         return $result;
     }
