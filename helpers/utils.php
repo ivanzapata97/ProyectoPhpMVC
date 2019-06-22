@@ -46,4 +46,26 @@ class Utils {
             return true;
         }
     }
+    public static function showStatus($status){
+        $value = "pendiente";
+        if($status == "confirm"){
+            return $value;
+        }
+        elseif ($status == "preparation") {
+            $value = "En preparacion";
+            return $value;
+        }
+        elseif($status == "ready"){
+            $value = "Preparado para enviar";
+            return $value;
+        }
+        elseif($status == "sended"){
+            $value = "Enviado";
+            return $value;
+        }
+        return $value;
+    }
+    public static function deleteCarrito(){
+        unset($_SESSION['carrito']);
+    }
 }

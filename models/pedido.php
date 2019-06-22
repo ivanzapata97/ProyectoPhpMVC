@@ -90,7 +90,7 @@ class Pedido{
         foreach($_SESSION['carrito'] as $elemento){
             $producto = $elemento['producto'];
 
-            $insert = "INSERT INTO lineas_pedidos VALUES (NULL, {$pedido_id},{$producto->id},{$elemento['unidades']})";
+            $insert = "INSERT INTO lineas_pedido VALUES (NULL, {$pedido_id},{$producto->id},{$elemento['unidades']})";
 
             $save = $this->db->query($insert);
         }
@@ -99,7 +99,6 @@ class Pedido{
             $result = true;
         }
         return $result;
-
     }
     public function getAll(){
         $pedidos = $this->db->query("SELECT * FROM pedidos ORDER BY id DESC");
@@ -126,6 +125,15 @@ class Pedido{
         $sql = "SELECT * FROM pedidos WHERE usuario_id = {$this->getUsuario_id()} ORDER BY id DESC";
         $pedidos = $this->db->query($sql);
         return $pedidos;
-
+    }
+    public function edit(){
+        $sql = "UPDATE pedidos SET estado = '{$this->getEstado()}' WHERE id = {$this->getId()}";
+        
+        $save = $this->db->query($sql);
+        $result = false;
+        if($save){
+            $result = true;
+        }
+        return $result;
     }
 }

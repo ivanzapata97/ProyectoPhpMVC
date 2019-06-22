@@ -32,7 +32,6 @@ class pedidoController{
                 //guardo pedido
                 $save_linea = $pedido->save_linea();
 
-
                 if($save && $save_linea){
                     $_SESSION['pedido'] = "complete";
                 }
@@ -88,6 +87,32 @@ class pedidoController{
         }
         else {
             header("Location:".base_url."pedido/mispedidos");
+        }
+    }
+    public function gestion(){
+        Utils::isAdmin();
+
+        $gestion = true;
+        $pedido =  new Pedido();
+        $pedidos = $pedido->getAll();
+
+        require_once 'views/pedido/mis_pedidos.php';
+    }
+    public function estado(){
+        Utils::isAdmin();
+
+        if(isset($_POST['pedido_id']) && isset($_POST['estado'])){
+            //actualizar el pedido
+            $pedido_estado = $_POST['estado'];
+            $pedido_id = $_POST['pedido_id'];
+            $pedido = new Pedido();
+            $pedido->setId($pedido_id);
+            $pedido->setEstado($pedido_estado);
+            $pedido->edit();
+
+            header("Location:".base_url."pedido/detalle&id=".$pedido_id);
+        }else{
+            header("Location:".base_url);
         }
     }
 }
